@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kaarni Studio — リモート・リストレーション</title>
+<meta name="description" content="Kaarni Studioは、フィンランド式ヒート、スウェディッシュ・ストローク、筋膜ワークをビデオ通話でご案内します。ご自宅でプライベートなリカバリーセッションをご予約ください。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,650;0,9..144,800;1,9..144,500&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700;900&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<style>
+  /* 日本語フォントのフォールバック */
+  body { font-family: "Outfit", "Noto Sans JP", "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif; }
+  h1, h2, h3, .hero-title, .section-title, .done-title { font-family: "Fraunces", "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif; line-height: 1.4; }
+  body { line-break: strict; word-break: normal; overflow-wrap: anywhere; }
+</style>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='88'>🌲</text></svg>">
+</head>
+<body>
+
+<a class="skip-link" href="#main">本文へスキップ</a>
+
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">K</span>
+      <span class="brand-text">
+        <span class="brand-ja">カーニ</span>
+        <span class="brand-en">STUDIO</span>
+      </span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="メインメニュー">
+      <a href="#menu">プログラム</a>
+      <a href="#flow">ご利用の流れ</a>
+      <a href="#therapists">施術者紹介</a>
+      <a href="#voice">お客様の声</a>
+      <a href="#faq">よくある質問</a>
+      <a class="nav-cta" href="#booking">セッションを予約</a>
+    </nav>
+
+    <div class="header-tools">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">
+        <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+        <span class="theme-toggle-label">夕暮れ</span>
+      </button>
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="nav">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        <span class="sr-only">メニューを開く</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<span id="top"></span>
+
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="steam" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="wrap hero-inner">
+    <p class="hero-eaves" aria-hidden="true">2026年創業 · ヘルシンキ・リモート</p>
+
+    <div class="hero-copy reveal">
+      <p class="hero-kicker">プライベート・ビデオセッション · 完全予約制</p>
+      <h1 class="hero-title">
+        <span class="line">いまいる場所で、</span>
+        <span class="line accent">深く休む。</span>
+      </h1>
+      <p class="hero-lead">
+        フィンランド式ヒート、ゆったりとしたスウェディッシュ・ストローク、そして深い筋膜ワーク。ライブで、ひとつひとつ丁寧にご案内します。
+        お部屋の床の上で過ごす、50分間の静かなリカバリー。
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#booking">枠を予約する</a>
+        <a class="btn btn-ghost" href="#menu">プログラムを見る</a>
+      </div>
+      <ul class="hero-badges">
+        <li><b>06</b>のプロトコル</li>
+        <li><b>50</b>分から</li>
+        <li><b>月</b>曜定休</li>
+      </ul>
+    </div>
+
+    <aside class="hero-card reveal" aria-label="本日のスタジオ">
+      <div class="hero-card-head">
+        <span class="seal" aria-hidden="true">01</span>
+        <div>
+          <p class="hero-card-title">本日の受付状況</p>
+          <p class="hero-card-sub" id="todayLabel">—</p>
+        </div>
+      </div>
+      <dl class="hero-card-list">
+        <div><dt>受付時間</dt><dd>09:00 – 20:00</dd></div>
+        <div><dt>空き枠</dt><dd id="todaySlots">残り4枠</dd></div>
+        <div><dt>形式</dt><dd>ビデオ通話（リンクはメールでお送りします）</dd></div>
+      </dl>
+      <p class="hero-card-note">当日のご予約は、開始の2時間前に締め切ります。</p>
+    </aside>
+  </div>
+
+  <div class="wave-divider" aria-hidden="true"></div>
+</section>
+
+<section class="promise">
+  <div class="wrap">
+    <div class="promise-grid">
+      <article class="promise-item reveal">
+        <span class="promise-num" aria-hidden="true">01</span>
+        <h3>カメラは1台。観客はいません。</h3>
+        <p>セッションを録画することは一切ありません。あなたと施術者、そしてその1時間だけの限定リンクだけです。</p>
+      </article>
+      <article class="promise-item reveal">
+        <span class="promise-num" aria-hidden="true">02</span>
+        <h3>マットが1枚あれば十分です。</h3>
+        <p>タオル、ヨガマット程度の床のスペース、そしてカメラ。すべてのプロトコルをこの環境に合わせて組み立てています。</p>
+      </article>
+      <article class="promise-item reveal">
+        <span class="promise-num" aria-hidden="true">03</span>
+        <h3>変更は前日18:00まで。</h3>
+        <p>前日の18時までなら、日程変更もキャンセルも可能です。期限内のご変更に手数料はかかりません。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section menu-section" id="menu">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <p class="section-kicker">プログラム · 01</p>
+      <h2 class="section-title">6つのリカバリー</h2>
+      <p class="section-lead">
+        すべてのプロトコルはライブ配信によるリモート形式です。施術者がカメラ越しに圧の加減や呼吸を共有し、ご自宅でもしっかり効果を感じていただけます。
+      </p>
+    </header>
+
+    <div class="menu-grid" id="menuGrid"></div>
+
+    <p class="menu-foot reveal">表示価格は税込です。延長やボタニカルキットなどのオプションは、ご予約時にお選びいただけます。</p>
+  </div>
+</section>
+
+<section class="section flow-section" id="flow">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <p class="section-kicker">ご利用の流れ · 02</p>
+      <h2 class="section-title">セッションまでの4ステップ</h2>
+    </header>
+
+    <ol class="flow-list">
+      <li class="flow-item reveal">
+        <span class="flow-step">01</span>
+        <h3>プロトコルを選ぶ</h3>
+        <p>6つのプログラムからお選びください。迷われる場合は、スタジオにお任せいただくこともできます。</p>
+      </li>
+      <li class="flow-item reveal">
+        <span class="flow-step">02</span>
+        <h3>枠を確保する</h3>
+        <p>カレンダーを開いて、空いている1時間をお取りください。当日枠は空きがある場合に表示されます。</p>
+      </li>
+      <li class="flow-item reveal">
+        <span class="flow-step">03</span>
+        <h3>スタジオからのご案内を読む</h3>
+        <p>ご予約が完了すると、すぐにリンクと簡単な事前案内がメールで届きます。</p>
+      </li>
+      <li class="flow-item reveal">
+        <span class="flow-step">04</span>
+        <h3>ルームに入る</h3>
+        <p>時間になったらご参加ください。あとは、目の前の声に身をゆだねるだけです。</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section therapist-section" id="therapists">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <p class="section-kicker">スタッフ · 03</p>
+      <h2 class="section-title">あなたの1時間を預かる人</h2>
+    </header>
+
+    <div class="therapist-grid" id="therapistGrid"></div>
+  </div>
+</section>
+
+<section class="section booking-section" id="booking">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <p class="section-kicker">ご予約 · 04</p>
+      <h2 class="section-title">席を確保する</h2>
+      <p class="section-lead">4つの簡単なステップです。お支払いはセッション後、当日中にご案内します。</p>
+    </header>
+
+    <div class="booking-shell reveal">
+      <ol class="stepper" id="stepper" aria-label="予約の進行状況">
+        <li class="step is-active" data-step="1"><span class="step-dot">01</span><span class="step-name">プロトコル</span></li>
+        <li class="step" data-step="2"><span class="step-dot">02</span><span class="step-name">日時</span></li>
+        <li class="step" data-step="3"><span class="step-dot">03</span><span class="step-name">お客様情報</span></li>
+        <li class="step" data-step="4"><span class="step-dot">04</span><span class="step-name">確認</span></li>
+      </ol>
+
+      <div class="booking-body">
+        <form id="bookingForm" novalidate>
+
+          <fieldset class="panel is-active" data-panel="1">
+            <legend class="panel-title">01 · プロトコルを選ぶ</legend>
+
+            <div class="choice-grid" id="planChoices" role="radiogroup" aria-label="プロトコルの選択"></div>
+
+            <div class="field-block">
+              <p class="field-label">オプション（任意）</p>
+              <div class="option-list" id="optionList"></div>
+            </div>
+
+            <div class="field-block">
+              <p class="field-label">施術者のご希望</p>
+              <div class="select-wrap">
+                <select id="therapistSelect" name="therapist">
+                  <option value="Any available">指名なし（空いている施術者）</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="panel-actions">
+              <span class="panel-hint" id="hint1">プロトコルを1つ選択して進んでください。</span>
+              <button class="btn btn-primary" type="button" data-next="2">次へ</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="panel" data-panel="2">
+            <legend class="panel-title">02 · 日付と時間</legend>
+
+            <div class="calendar-layout">
+              <div class="calendar">
+                <div class="calendar-head">
+                  <button class="cal-nav" type="button" id="calPrev" aria-label="前の月">‹</button>
+                  <p class="cal-month" id="calMonth">—</p>
+                  <button class="cal-nav" type="button" id="calNext" aria-label="次の月">›</button>
+                </div>
+                <div class="cal-weekdays" aria-hidden="true">
+                  <span class="sun">日</span><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span class="sat">土</span>
+                </div>
+                <div class="cal-grid" id="calGrid" role="grid" aria-label="セッション日"></div>
+                <p class="cal-legend">
+                  <span><i class="dot dot-open"></i>空きあり</span>
+                  <span><i class="dot dot-few"></i>残りわずか</span>
+                  <span><i class="dot dot-closed"></i>休業・満席</span>
+                </p>
+              </div>
+
+              <div class="slots">
+                <p class="slots-title" id="slotsTitle">まず日付を選んでください</p>
+                <div class="slot-grid" id="slotGrid"></div>
+              </div>
+            </div>
+
+            <div class="panel-actions">
+              <button class="btn btn-ghost" type="button" data-prev="1">戻る</button>
+              <span class="panel-hint" id="hint2">日付と時間を選択してください。</span>
+              <button class="btn btn-primary" type="button" data-next="3">次へ</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="panel" data-panel="3">
+            <legend class="panel-title">03 · お客様について</legend>
+
+            <div class="form-grid">
+              <label class="field">
+                <span class="field-label">お名前 <em class="req">必須</em></span>
+                <input type="text" id="name" name="name" autocomplete="name" placeholder="例：山田 花子" required>
+                <span class="field-error" data-error-for="name"></span>
+              </label>
+
+              <label class="field">
+                <span class="field-label">ふりがな・呼び名</span>
+                <input type="text" id="kana" name="kana" placeholder="例：はなこ">
+                <span class="field-error" data-error-for="kana"></span>
+              </label>
+
+              <label class="field">
+                <span class="field-label">メールアドレス <em class="req">必須</em></span>
+                <input type="email" id="email" name="email" autocomplete="email" placeholder="例：hanako@example.com" required>
+                <span class="field-error" data-error-for="email"></span>
+              </label>
+
+              <label class="field">
+                <span class="field-label">電話番号 <em class="req">必須</em></span>
+                <input type="tel" id="tel" name="tel" autocomplete="tel" placeholder="例：090-1234-5678" required>
+                <span class="field-error" data-error-for="tel"></span>
+              </label>
+
+              <label class="field field-wide">
+                <span class="field-label">体の状態について（任意）</span>
+                <textarea id="note" name="note" rows="4" placeholder="例：デスクワークの後に上背部が張ります。やや強めの圧が好みです。"></textarea>
+              </label>
+
+              <label class="field field-wide checkbox">
+                <input type="checkbox" id="agree" name="agree" required>
+                <span>
+                  <a href="#faq">スタジオの利用規約およびキャンセルポリシー</a>に同意します。<em class="req">必須</em>
+                </span>
+              </label>
+              <span class="field-error field-wide" data-error-for="agree"></span>
+            </div>
+
+            <div class="panel-actions">
+              <button class="btn btn-ghost" type="button" data-prev="2">戻る</button>
+              <span class="panel-hint" id="hint3">必須項目を入力してください。</span>
+              <button class="btn btn-primary" type="button" data-next="4">確認へ</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="panel" data-panel="4">
+            <legend class="panel-title">04 · ご予約内容の確認</legend>
+
+            <div class="confirm-card" id="confirmCard">
+              <dl class="confirm-list" id="confirmList"></dl>
+              <div class="confirm-total">
+                <span>セッション後のお支払い額</span>
+                <strong id="confirmTotal">€0</strong>
+              </div>
+            </div>
+
+            <div class="panel-actions">
+              <button class="btn btn-ghost" type="button" data-prev="3">戻る</button>
+              <span class="panel-hint">内容に問題なければ、送信してください。</span>
+              <button class="btn btn-primary btn-seal" type="submit">予約を確定する</button>
+            </div>
+          </fieldset>
+
+        </form>
+
+        <div class="done" id="donePanel" hidden>
+          <div class="done-seal" aria-hidden="true">済</div>
+          <h3 class="done-title">お席を確保しました</h3>
+          <p class="done-lead">通話リンクと当日のご案内を、ご入力いただいたメールアドレスにお送りしています。</p>
+          <dl class="done-list" id="doneList"></dl>
+          <div class="done-actions">
+            <button class="btn btn-ghost" type="button" id="resetBooking">別の時間を予約する</button>
+            <a class="btn btn-primary" href="#top">スタジオに戻る</a>
+          </div>
+        </div>
+      </div>
+
+      <aside class="summary" id="summaryBar" aria-live="polite">
+        <div class="summary-line">
+          <span class="summary-label">選択中</span>
+          <span class="summary-value" id="summaryPlan">未選択</span>
+        </div>
+        <div class="summary-line">
+          <span class="summary-label">日時</span>
+          <span class="summary-value" id="summaryWhen">未選択</span>
+        </div>
+        <div class="summary-line summary-price">
+          <span class="summary-label">合計</span>
+          <span class="summary-value" id="summaryTotal">€0</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="section voice-section" id="voice">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <p class="section-kicker">お客様の声 · 05</p>
+      <h2 class="section-title">セッションのあとで</h2>
+    </header>
+
+    <div class="voice-grid">
+      <figure class="voice-card reveal">
+        <blockquote>画面越しのセッションで首にここまで効くとは思いませんでした。最後の10分には肩がすっと落ち、意識せずに首を回せるようになっていました。</blockquote>
+        <figcaption><span class="voice-name">マルタ K.さん</span><span class="voice-meta">筋膜ディープ · 30代</span></figcaption>
+      </figure>
+      <figure class="voice-card reveal">
+        <blockquote>遅い電車で着いたホテルから予約しました。移動もなく、遅い時間枠で、狭い床でも実際に真似できるほど丁寧な指示がありました。</blockquote>
+        <figcaption><span class="voice-name">ヨナス P.さん</span><span class="voice-meta">ロングストローク・スウェディッシュ · 40代</span></figcaption>
+      </figure>
+      <figure class="voice-card reveal">
+        <blockquote>ヒートの儀式で教わったタオルの手順を、いまではほぼ毎晩続けています。部屋には白樺の香りが広がり、早く眠れるようになりました。</blockquote>
+        <figcaption><span class="voice-name">シグリッド L.さん</span><span class="voice-meta">フィンランド式ヒート · 50代</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section faq-section" id="faq">
+  <div class="wrap wrap-narrow">
+    <header class="section-head reveal">
+      <p class="section-kicker">よくある質問 · 06</p>
+      <h2 class="section-title">最初によくいただくご質問</h2>
+    </header>
+
+    <div class="faq-list">
+      <details class="faq-item reveal">
+        <summary>リモート・リストレーションセッションとは何ですか？</summary>
+        <p>ビデオ通話でつながり、施術者がご自身で行うセルフケアの流れをお見せしながら、圧の強さ、角度、呼吸をリアルタイムでコーチングします。ご自宅にいる方と施術を交換し合えるペアセッションもご用意しています。</p>
+      </details>
+      <details class="faq-item reveal">
+        <summary>何を準備すればよいですか？</summary>
+        <p>ヨガマット1枚分の床のスペース、バスタオル1枚、そしてカメラ付きの端末をご用意ください。ボタニカルや玄武岩のストーンをご希望の場合は、ご予約時にキットを追加いただければ、セッションの3日前までにお届けします。</p>
+      </details>
+      <details class="faq-item reveal">
+        <summary>日程の変更やキャンセルはできますか？</summary>
+        <p>前日18:00までは、変更・キャンセルとも無料です。それ以降はセッション料金の半額を頂戴します。無断欠席の場合は全額のご請求となります。ご体調がすぐれない場合は、まずご連絡ください。個別に対応いたします。</p>
+      </details>
+      <details class="faq-item reveal">
+        <summary>お支払いはいつですか？</summary>
+        <p>セッション終了後に、お支払いリンクをメールでお送りします。3日以内にお支払いください。クレジットカードと主要なウォレット決済に対応しています。5回券・10回券もご相談に応じます。</p>
+      </details>
+      <details class="faq-item reveal">
+        <summary>妊娠中でも予約できますか？</summary>
+        <p>妊娠中期以降の方には、マタニティ向けのシーケンスをご用意しています。ご予約の備考欄に妊娠週数をご記入ください。けがや持病がある場合は、ご予約の前にかかりつけの医師にご相談ください。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <span class="brand-mark" aria-hidden="true">K</span>
+      <p class="footer-ja">カーニ</p>
+      <p class="footer-en">STUDIO — REMOTE RESTORATION</p>
+      <p class="footer-note">ご自宅の床から始める、リカバリー・プロトコル。</p>
+    </div>
+
+    <nav class="footer-nav" aria-label="フッターメニュー">
+      <div>
+        <p class="footer-head">プログラム</p>
+        <a href="#menu">ロングストローク・スウェディッシュ</a>
+        <a href="#menu">フィンランド式ヒートの儀式</a>
+        <a href="#menu">筋膜ディープ</a>
+        <a href="#menu">ラインワーク</a>
+      </div>
+      <div>
+        <p class="footer-head">スタジオ</p>
+        <a href="#flow">ご利用の流れ</a>
+        <a href="#therapists">施術者紹介</a>
+        <a href="#faq">よくある質問</a>
+        <a href="#booking">予約する</a>
+      </div>
+      <div>
+        <p class="footer-head">受付窓口</p>
+        <a href="tel:+35800000000">+358 00 000 000</a>
+        <a href="mailto:desk@kaarni.example">desk@kaarni.example</a>
+        <p class="footer-plain">09:00 – 20:00<br>月曜定休</p>
+      </div>
+    </nav>
+  </div>
+
+  <div class="wrap footer-bottom">
+    <p>© 2026 Kaarni Studio</p>
+    <p class="footer-fine">展示用に作られた架空のスタジオです。</p>
+  </div>
+</footer>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>
